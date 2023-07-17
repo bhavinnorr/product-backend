@@ -63,7 +63,9 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        $product = Product::where('id', $id)->first();
+        // $product = Product::where('id', $id)->first();
+        $product = Product::join('product_images', 'product.id', '=', 'product_images.product_id')
+        ->get(['product.*', 'product_images.file_name'])->where('id', $id)->first();
         return response()->json([
             'message' => 'Product fetched successfully',
             'status' => 'ok',
