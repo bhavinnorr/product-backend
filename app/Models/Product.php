@@ -13,22 +13,22 @@ class Product extends Model
         'id',
         'name',
         'in_stock',
-        'fileList',
+        // 'fileList',
         'category',
         'price'
     ];
 
     // Other model features, such as timestamps and table name
 
-    protected $casts = [
-        'fileList' => 'array', // Assuming 'fileList' is an array field
-    ];
+    // protected $casts = [
+    //     'fileList' => 'array', // Assuming 'fileList' is an array field
+    // ];
 
     // Optional: Set the table name explicitly if it's different from the default convention
     protected $table = 'product';
 
-    // public function images()
-    // {
-    //     $this->hasMany(ProductImage::class);
-    // }
+    public function images()
+    {
+        $this->hasMany(ProductImage::class);
+    }
 }
