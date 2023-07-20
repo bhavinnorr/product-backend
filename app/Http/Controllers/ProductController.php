@@ -14,15 +14,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //    $products = Product::select('id','name')
-        //     ->with('images:id')->get();
+        $products = Product::select('*')
+            ->with('images:id,product_id,file_name')->get();
 
-        // $products = Product::all();
-        $products = Product::join('product_images', 'product.id', '=', 'product_images.product_id')
-        ->get(['product.*', 'product_images.file_name']);
-        // $products = Product::with("images")->get();
-        // $products = Product::with(['images', 'file_name'])->get();
-        // $products = $products->load('images');
+
+        // $products = Product::select('product.*', 'product_images.file_name')
+        // ->join('product_images', 'product.id', '=', 'product_images.product_id')
+        // ->get();
 
         return response()->json([
             'message' => 'All Products fetched successfully',
@@ -64,8 +62,10 @@ class ProductController extends Controller
     public function show(string $id)
     {
         // $product = Product::where('id', $id)->first();
-        $product = Product::join('product_images', 'product.id', '=', 'product_images.product_id')
-        ->get(['product.*', 'product_images.file_name'])->where('id', $id)->first();
+        $product = Product::select('*')
+            ->with('images:id,product_id,file_name')->where('id', $id)->first();
+        // $product = Product::join('product_images', 'product.id', '=', 'product_images.product_id')
+        //     ->get(['product.*', 'product_images.file_name'])->where('id', $id)->first();
         return response()->json([
             'message' => 'Product fetched successfully',
             'status' => 'ok',

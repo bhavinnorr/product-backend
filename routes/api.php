@@ -161,6 +161,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         // }
         return Response::json($product, 200);
     });
+    Route::post('profile', [UserController::class, 'profile']);
+
     // Route::resource('products', ProductController::class)->except(['create', 'edit', 'destroy']);
     // Route::resource('users', UserController::class)->except(['create', 'edit', 'destroy']);
 });
@@ -169,9 +171,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 //     // 'middleware' => 'auth',
 //     'prefix' => 'auth'
 // ], function ($router) {
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/profile', [AuthController::class, 'profile']);
+Route::post('login', [AuthController::class, 'login']);
+Route::post('register', [AuthController::class, 'register']);
 Route::post('logout', [AuthController::class, 'logout']);
 Route::post('refresh', [AuthController::class, 'refresh']);
 // Route::resource('products', ProductController::class)->except(['create', 'edit', 'destroy']);
